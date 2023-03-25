@@ -1,44 +1,48 @@
 package com.burakkolay.ecommerce.business.concretes;
 
 import com.burakkolay.ecommerce.business.abstracts.ProductService;
-import com.burakkolay.ecommerce.entities.concretes.Product;
-import com.burakkolay.ecommerce.repository.abstracts.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.burakkolay.ecommerce.entities.Product;
+import com.burakkolay.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProductManager implements ProductService {
-    @Autowired
-    private ProductRepository repository;
+
+    private final ProductRepository repository;
+
+    public ProductManager(ProductRepository repository) {
+        this.repository = repository;
+    }
 
 
     @Override
     public List<Product> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override
     public Product getById(int id) {
-        return repository.getById(id);
+        return repository.findById(id).orElseThrow();
     }
 
     @Override
     public Product add(Product product) {
-
-        return repository.add(product);
+        validateProduct(product);
+        return repository.save(product);
     }
 
     @Override
     public Product update(int id, Product product) {
         validateProduct(product);
-        return repository.update(id,product);
+        product.setId(id);
+        return repository.save(product);
     }
 
     @Override
     public void delete(int id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
     private void validateProduct(Product product){
         checkIfPriceValid(product);

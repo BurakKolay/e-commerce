@@ -1,6 +1,6 @@
 package com.burakkolay.ecommerce.business.abstracts;
 
-import com.burakkolay.ecommerce.entities.concretes.Product;
+import com.burakkolay.ecommerce.entities.Product;
 
 import java.util.List;
 

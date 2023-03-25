@@ -1,8 +1,7 @@
 package com.burakkolay.ecommerce.api.controllers;
 
 import com.burakkolay.ecommerce.business.abstracts.ProductService;
-import com.burakkolay.ecommerce.entities.concretes.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.burakkolay.ecommerce.entities.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
